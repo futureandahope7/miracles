@@ -2,5 +2,7 @@ index.php
 # Testimonies component write artifacts
 testimonies/data/*.lock
 testimonies/data/*.tmp
+# Live stories, created by the first admin save (the repo ships testimonies.sample.json)
+testimonies/data/testimonies.json
 # Private per-site settings (admin password hash)
 testimonies/config.local.php

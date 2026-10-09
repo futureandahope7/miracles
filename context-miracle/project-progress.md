@@ -14,4 +14,6 @@
 - Card layout CSS, all scoped under `.tm` (`assets/testimonies.css`)
 - Admin page (`testimonies/admin.php`): password login, add/edit/hide/delete stories, CSRF protection
 - Settings in `testimonies/config.php` (stories per page, categories, excerpt length, password hash)
+- Admin password hash moved to `testimonies/config.local.php` (git-ignored, upload once only)
+- Safe re-uploads: live stories file `data/testimonies.json` is created by the first admin save and git-ignored; until then `data/testimonies.sample.json` is shown
 - Admin story list: optional category selector next to the search box ("All categories" by default), works alone or combined with a text search

@@ -24,6 +24,7 @@ return [
     ],
 
     // Where the stories are stored. Must be writable by the web server for the admin page.
+    // Created by the first admin save; until then data/testimonies.sample.json is shown.
     'data_file' => __DIR__ . '/data/testimonies.json',
 
     // Web path to this folder, e.g. '/miracle/testimonies'. Leave null to work it out automatically.

@@ -24,9 +24,17 @@ function tm_e($value)
 
 /* ---------- Storage ---------- */
 
+/**
+ * The stories file is created on the server by the first admin save, and is
+ * kept out of git and uploads so re-uploading the folder can't overwrite it.
+ * Until then, the bundled sample stories are shown.
+ */
 function tm_load()
 {
     $file = tm_config('data_file');
+    if (!is_file($file)) {
+        $file = __DIR__ . '/data/testimonies.sample.json';
+    }
     if (!is_file($file)) {
         return [];
     }

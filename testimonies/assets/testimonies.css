@@ -1,20 +1,34 @@
 /* Testimonies component. Everything is scoped under .tm so it won't affect the host page. */
 
 .tm {
-    --tm-text: #1f2328;
-    --tm-muted: #5c6370;
-    --tm-border: #d9dde3;
-    --tm-card: #ffffff;
-    --tm-bg-soft: #f6f7f9;
-    --tm-accent: #2f5d8a;
+    --tm-text: #1b2430;
+    --tm-muted: #525d6c;
+    --tm-border: #d3dbe6;
+    --tm-panel: #e6ecf3;
+    --tm-card: #f7f9fc;
+    --tm-bg-soft: #eef2f7;
+    --tm-ink: #1d3557;
+    --tm-ink-text: #dfe7f1;
+    --tm-accent: #2563a6;
     --tm-accent-text: #ffffff;
-    --tm-mark: #fff1a8;
-    --tm-radius: 10px;
+    --tm-cta: #f4b942;
+    --tm-cta-text: #1b2430;
+    --tm-mark: #ffe28a;
+    --tm-radius: 14px;
+    --tm-shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 6px 16px rgba(16, 24, 40, 0.07);
 
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     color: var(--tm-text);
     max-width: 52rem;
     margin: 1.5rem 0;
-    line-height: 1.55;
+    line-height: 1.6;
+}
+
+/* On the public page the component sits on its own tinted panel. */
+.tm:not(.tm-admin) {
+    background: var(--tm-panel);
+    border-radius: calc(var(--tm-radius) + 6px);
+    padding: 1.25rem;
 }
 
 .tm *,
@@ -29,16 +43,17 @@
     flex-wrap: wrap;
     align-items: flex-end;
     gap: 0.75rem;
-    padding: 1rem;
-    background: var(--tm-bg-soft);
-    border: 1px solid var(--tm-border);
+    padding: 1.1rem 1.25rem;
+    background: var(--tm-ink);
+    color: var(--tm-ink-text);
     border-radius: var(--tm-radius);
+    box-shadow: var(--tm-shadow);
 }
 
 .tm-field {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.3rem;
 }
 
 .tm-field-q {
@@ -50,36 +65,39 @@
 }
 
 .tm-field label {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
 
 .tm-form input,
 .tm-form select {
     width: 100%;
     font: inherit;
-    padding: 0.5rem 0.65rem;
-    border: 1px solid var(--tm-border);
-    border-radius: 6px;
-    background: #fff;
-    color: inherit;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: #f7f9fc;
+    color: var(--tm-text);
 }
 
 .tm-button {
     font: inherit;
-    font-weight: 600;
-    padding: 0.5rem 1.1rem;
-    border: 1px solid var(--tm-accent);
-    border-radius: 6px;
-    background: var(--tm-accent);
-    color: var(--tm-accent-text);
+    font-weight: 700;
+    padding: 0.6rem 1.3rem;
+    border: 1px solid var(--tm-cta);
+    border-radius: 10px;
+    background: var(--tm-cta);
+    color: var(--tm-cta-text);
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
+    transition: filter 0.15s;
 }
 
 .tm-button:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.06);
 }
 
 .tm-form input:focus-visible,
@@ -89,6 +107,13 @@
 .tm summary:focus-visible {
     outline: 3px solid var(--tm-accent);
     outline-offset: 2px;
+}
+
+/* The search band is dark, so focus rings there use the amber instead. */
+.tm-form input:focus-visible,
+.tm-form select:focus-visible,
+.tm-form .tm-button:focus-visible {
+    outline-color: var(--tm-cta);
 }
 
 /* Results */
@@ -102,7 +127,13 @@
 
 .tm-status {
     color: var(--tm-muted);
-    margin: 1rem 0 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 1.1rem 0.25rem 0.75rem;
+}
+
+.tm-empty {
+    margin: 0 0.25rem;
 }
 
 .tm-empty a {
@@ -116,14 +147,16 @@
 
 .tm-card {
     background: var(--tm-card);
-    border: 1px solid var(--tm-border);
     border-radius: var(--tm-radius);
-    padding: 1.1rem 1.25rem;
+    padding: 1.25rem 1.4rem;
+    box-shadow: var(--tm-shadow);
 }
 
 .tm-title {
-    margin: 0 0 0.25rem;
-    font-size: 1.2rem;
+    margin: 0 0 0.4rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
     line-height: 1.3;
 }
 
@@ -132,18 +165,21 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 0.35rem 0.75rem;
-    margin: 0 0 0.75rem;
+    margin: 0 0 0.85rem;
     font-size: 0.875rem;
     color: var(--tm-muted);
 }
 
 .tm-tag {
     display: inline-block;
-    padding: 0.1rem 0.6rem;
+    padding: 0.15rem 0.65rem;
     border-radius: 999px;
-    background: #e6eef6;
-    color: var(--tm-accent);
-    font-weight: 600;
+    background: #d6e4f3;
+    color: var(--tm-ink);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 .tm-excerpt,
@@ -161,9 +197,35 @@
 }
 
 .tm-more summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     cursor: pointer;
     color: var(--tm-accent);
     font-weight: 600;
+    list-style: none;
+}
+
+.tm-more summary::-webkit-details-marker {
+    display: none;
+}
+
+.tm-more summary::after {
+    content: "";
+    width: 0.45em;
+    height: 0.45em;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform 0.15s;
+}
+
+.tm-more[open] summary::after {
+    transform: rotate(-135deg) translateY(-1px);
+}
+
+.tm-more summary:hover {
+    text-decoration: underline;
 }
 
 .tm-more[open] summary {
@@ -174,40 +236,42 @@
     background: var(--tm-mark);
     color: inherit;
     padding: 0 0.1em;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
 /* Pager */
 .tm-pager {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.35rem;
+    gap: 0.4rem;
     margin-top: 1.25rem;
 }
 
 .tm-page,
 .tm-gap {
     display: inline-block;
-    min-width: 2.4rem;
-    padding: 0.4rem 0.7rem;
+    min-width: 2.5rem;
+    padding: 0.45rem 0.8rem;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 999px;
 }
 
 a.tm-page {
-    border: 1px solid var(--tm-border);
+    background: var(--tm-card);
     color: var(--tm-accent);
+    font-weight: 600;
     text-decoration: none;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.08);
 }
 
 a.tm-page:hover {
-    background: var(--tm-bg-soft);
+    background: #ffffff;
 }
 
 .tm-current {
-    background: var(--tm-accent);
-    color: var(--tm-accent-text);
-    font-weight: 600;
+    background: var(--tm-ink);
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .tm-disabled {

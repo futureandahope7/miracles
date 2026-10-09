@@ -67,9 +67,8 @@ function tm_admin_validate()
     if ($story['name'] === '') {
         $story['name'] = 'Anonymous';
     }
-    if ($story['date'] === '') {
-        $story['date'] = date('Y-m-d');
-    } elseif (!tm_valid_date($story['date'])) {
+    // The date is optional: blank means it isn't known.
+    if ($story['date'] !== '' && !tm_valid_date($story['date'])) {
         $errors['date'] = 'Please enter a valid date.';
     }
     if (!in_array($story['category'], tm_config('categories'), true)) {
@@ -169,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 if ($view === 'list' && isset($_GET['new'])) {
     $view = 'form';
-    $story = ['id' => 0, 'title' => '', 'name' => '', 'date' => date('Y-m-d'), 'category' => '', 'body' => '', 'published' => true];
+    $story = ['id' => 0, 'title' => '', 'name' => '', 'date' => '', 'category' => '', 'body' => '', 'published' => true];
 } elseif ($view === 'list' && isset($_GET['edit'])) {
     $story = tm_find(tm_load(), (int) $_GET['edit']);
     if (!$story) {
@@ -265,8 +264,9 @@ header('X-Robots-Tag: noindex');
                 <?php if (isset($errors['name'])): ?><p class="tm-field-error"><?= tm_e($errors['name']) ?></p><?php endif; ?>
             </div>
             <div class="tm-field">
-                <label for="date">Date</label>
+                <label for="date">Date (optional)</label>
                 <input type="date" id="date" name="date" value="<?= tm_e($story['date']) ?>">
+                <p class="tm-hint">Leave blank if the date isn’t known.</p>
                 <?php if (isset($errors['date'])): ?><p class="tm-field-error"><?= tm_e($errors['date']) ?></p><?php endif; ?>
             </div>
             <div class="tm-field">
@@ -344,7 +344,7 @@ header('X-Robots-Tag: noindex');
                     <tr>
                         <td><strong><?= tm_e($item['title']) ?></strong><br><span class="tm-hint"><?= tm_e($item['name'] ?? '') ?></span></td>
                         <td><?= tm_e($item['category'] ?? '') ?></td>
-                        <td><?= tm_e($item['date'] ?? '') ?></td>
+                        <td><?php if (!empty($item['date'])): ?><?= tm_e($item['date']) ?><?php else: ?><span class="tm-hint">No date</span><?php endif; ?></td>
                         <td>
                             <?php if (!empty($item['published'])): ?>
                                 <span class="tm-status-pill">Published</span>

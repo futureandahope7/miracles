@@ -116,7 +116,7 @@ function tm_contains_any($text, array $words)
 
 /**
  * Stories whose title, name or text contain every search word,
- * optionally limited to one category. Newest first.
+ * optionally limited to one category. Newest first; stories without a date come last.
  */
 function tm_search(array $items, $q = '', $category = '', $publishedOnly = true)
 {

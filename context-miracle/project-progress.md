@@ -12,6 +12,7 @@
 - Server-side search (all words must match, highlighted with <mark>), category filter, pagination (works without JavaScript)
 - Vanilla JS live search as you type (`assets/testimonies.js`)
 - Card layout CSS, all scoped under `.tm` (`assets/testimonies.css`)
+- Optional story date: admin accepts a blank date ("Date (optional)", shows "No date" in the list); front end hides it; undated stories sort last
 - Modern visual refresh: system sans-serif fonts, blue-grey panel, navy search band with amber button, off-white shadowed cards, pill pager
 - Admin page (`testimonies/admin.php`): password login, add/edit/hide/delete stories, CSRF protection
 - Settings in `testimonies/config.php` (stories per page, categories, excerpt length, password hash)

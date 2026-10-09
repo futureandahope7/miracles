@@ -1,1 +1,6 @@
 index.php
+# Testimonies component write artifacts
+testimonies/data/*.lock
+testimonies/data/*.tmp
+# Private per-site settings (admin password hash)
+testimonies/config.local.php
